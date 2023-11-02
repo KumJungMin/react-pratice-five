@@ -39,7 +39,7 @@ function todoReducer(state: Todo[], action: TodoAction): Todo[] {
   }
 }
 
-export default function useTodoState() {
+export default function useTodoReducer() {
   // userReducer의 첫번째 파라미터는 리듀서 함수, 두번째 파라미터는 초기값
   // export해서 context에서 사용할 수 있도록 함
   const [state, dispatch] = useReducer(todoReducer, initialTodos);
