@@ -1,9 +1,6 @@
-import { createContext, useReducer } from "react";
-import type { Todo, TodoAction } from "../types/todo";
+import { createContext } from "react";
+import type { TodoState, TodoDispatch } from "../types/todo";
 import useTodoState from "../reducers/todo";
-
-type TodoDispatch = (action: TodoAction) => void;
-type TodoState = Todo[];
 
 // Tip!! 하나의 Context 를 만들어서 두개의 Context 를 만들어서 따로 따로 넣어줌
 // 이렇게 하면 dispatch 만 필요한 컴포넌트에서 불필요한 렌더링 방지 가능

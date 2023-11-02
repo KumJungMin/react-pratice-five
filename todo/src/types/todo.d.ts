@@ -9,3 +9,6 @@ export interface TodoAction {
   todo: Todo;
   id: number;
 }
+
+export type TodoDispatch = (action: TodoAction) => void;
+export type TodoState = Todo[];
