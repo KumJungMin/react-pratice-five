@@ -75,3 +75,5 @@ function TodoItem({ id, done, text }: TodoItemProps) {
     </ItemBlock>
   );
 }
+
+export default TodoItem;
