@@ -22,8 +22,15 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
 
 // 2. Context에 접근하기 위한 커스텀 훅
 export function useTodoState() {
-  return useContext(TodoStateContext);
+  const context = useContext(TodoStateContext);
+  if (!context) {
+    throw new Error("Cannot find TodoProvider");
+  }
 }
 export function useTodoDispatch() {
-  return useContext(TodoDispatchContext);
+  const context = useContext(TodoDispatchContext);
+  if (!context) {
+    throw new Error("Cannot find TodoProvider");
+  }
+  return context;
 }
