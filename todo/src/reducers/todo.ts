@@ -1,5 +1,5 @@
 import { useReducer } from "react";
-import type { Todo } from "../types/todo";
+import type { Todo, TodoAction } from "../types/todo";
 // 1. 초기값 설정
 const initialTodos = [
   {
@@ -23,15 +23,8 @@ const initialTodos = [
     done: false,
   },
 ];
-
-interface IAction {
-  type: string;
-  todo: Todo;
-  id: number;
-}
-
 // 2. 리듀서 함수 만들기
-function todoReducer(state: Todo[], action: IAction): Todo[] {
+function todoReducer(state: Todo[], action: TodoAction): Todo[] {
   switch (action.type) {
     case "CREATE":
       return state.concat(action.todo);

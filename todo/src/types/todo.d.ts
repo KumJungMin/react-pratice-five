@@ -3,3 +3,9 @@ export interface Todo {
   text: string;
   done: boolean;
 }
+
+export interface TodoAction {
+  type: string;
+  todo: Todo;
+  id: number;
+}
