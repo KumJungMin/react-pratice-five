@@ -84,24 +84,25 @@ function TodoCreate() {
   const [value, setValue] = useState("");
 
   const dispatch = useTodoDispatch();
-  // const nextId = useTodoNextId();
+  const nextId = useTodoNextId();
 
   const onToggle = () => setOpen((prev) => !prev);
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setValue(e.currentTarget.value);
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    // e.preventDefault(); // 새로고침 방지
-    // dispatch({
-    //   type: "CREATE",
-    //   todo: {
-    //     id: nextId.current,
-    //     text: value,
-    //     done: false,
-    //   },
-    // });
-    // setValue("");
-    // setOpen(false);
-    // nextId.current += 1; // useRef로 관리하는 값은 이렇게 수정해줘야 합니다!!
+    e.preventDefault(); // 새로고침 방지
+
+    dispatch({
+      type: "CREATE",
+      todo: {
+        id: nextId.current,
+        text: value,
+        done: false,
+      },
+    });
+    setValue("");
+    setOpen(false);
+    nextId.current += 1; // useRef로 관리하는 값은 이렇게 수정해줘야 합니다!!
   };
 
   return (
