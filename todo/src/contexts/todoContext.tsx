@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useRef } from "react";
 import type { TodoState, TodoDispatch } from "../types/todo";
 import useTodoReducer from "../reducers/todo";
 
@@ -7,14 +7,22 @@ import useTodoReducer from "../reducers/todo";
 // 추가적으로, 사용하게 되는 과정에서 더욱 편리함
 const TodoStateContext = createContext<TodoState | undefined>(undefined);
 const TodoDispatchContext = createContext<TodoDispatch | undefined>(undefined);
+const TodoNextIdContext = createContext<
+  React.MutableRefObject<number> | undefined
+>(undefined);
 
 // 1. Provider를 만들어서 컴포넌트를 감싸주면, 하위 컴포넌트에서 Context에 접근 가능
 export function TodoProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useTodoReducer();
+  const nextId = useRef(5);
+  // 새로운 항목을 추가 할 때 사용 할 고유 ID
+
   return (
     <TodoStateContext.Provider value={state as TodoState}>
       <TodoDispatchContext.Provider value={dispatch as TodoDispatch}>
-        {children}
+        <TodoNextIdContext.Provider value={nextId}>
+          {children}
+        </TodoNextIdContext.Provider>
       </TodoDispatchContext.Provider>
     </TodoStateContext.Provider>
   );
@@ -26,9 +34,18 @@ export function useTodoState() {
   if (!context) {
     throw new Error("Cannot find TodoProvider");
   }
+  return context;
 }
 export function useTodoDispatch() {
   const context = useContext(TodoDispatchContext);
+  if (!context) {
+    throw new Error("Cannot find TodoProvider");
+  }
+  return context;
+}
+
+export function useTodoNextId() {
+  const context = useContext(TodoNextIdContext);
   if (!context) {
     throw new Error("Cannot find TodoProvider");
   }
