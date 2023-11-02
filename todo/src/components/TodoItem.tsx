@@ -19,6 +19,12 @@ const ItemBlock = styled.div`
   align-items: center;
   padding-top: 12px;
   padding-bottom: 12px;
+  &:hover {
+    // Remove 컴포넌트를 보여줍니다.
+    ${Remove} {
+      display: initial;
+    }
+  }
   }
 `;
 
