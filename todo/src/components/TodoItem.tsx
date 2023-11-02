@@ -25,10 +25,9 @@ const ItemBlock = styled.div`
       display: initial;
     }
   }
-  }
 `;
 
-const CheckCircle = styled.div`
+const CheckCircle = styled.div<StyleProps>`
   width: 32px;
   height: 32px;
   border-radius: 16px;
@@ -39,16 +38,40 @@ const CheckCircle = styled.div`
   justify-content: center;
   margin-right: 20px;
   cursor: pointer;
+  ${(props: StyleProps) =>
+    props.done &&
+    `
+  border: 1px solid #38d9a9; 
+  color: #38d9a9;
+  `}
 `;
 
-const Text = styled.div`
+// styled에 props 넘길 때는 타입 선언 필수!!
+const Text = styled.div<StyleProps>`
   flex: 1;
   font-size: 21px;
   color: #495057;
+  ${(props) => props.done && `color: #ced4da;`}
 `;
 
 interface TodoItemProps {
   id: number;
   done: boolean;
   text: string;
+}
+
+interface StyleProps {
+  done: boolean;
+}
+
+function TodoItem({ id, done, text }: TodoItemProps) {
+  return (
+    <ItemBlock>
+      <CheckCircle done={done}>{done && <MdDone />}</CheckCircle>
+      <Text done={done}>{text}</Text>
+      <Remove>
+        <MdDelete />
+      </Remove>
+    </ItemBlock>
+  );
 }
