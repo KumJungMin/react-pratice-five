@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import { MdDone, MdDelete } from "react-icons/md";
 import { useTodoDispatch } from "../contexts/todoContext";
@@ -87,4 +88,5 @@ function TodoItem({ id, done, text }: TodoItemProps) {
   );
 }
 
-export default TodoItem;
+// React.memo 를 사용하여 TodoItem 컴포넌트의 불필요한 렌더링을 방지합니다.
+export default React.memo(TodoItem);
