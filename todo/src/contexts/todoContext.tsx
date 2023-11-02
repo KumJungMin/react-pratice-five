@@ -5,8 +5,8 @@ import useTodoReducer from "../reducers/todo";
 // Tip!! 하나의 Context 를 만들어서 두개의 Context 를 만들어서 따로 따로 넣어줌
 // 이렇게 하면 dispatch 만 필요한 컴포넌트에서 불필요한 렌더링 방지 가능
 // 추가적으로, 사용하게 되는 과정에서 더욱 편리함
-const TodoStateContext = createContext<TodoState | undefined>(undefined);
-const TodoDispatchContext = createContext<TodoDispatch | undefined>(undefined);
+const TodoStateContext = createContext<TodoState | []>([]);
+const TodoDispatchContext = createContext<TodoDispatch | {}>({});
 const TodoNextIdContext = createContext<
   React.MutableRefObject<number> | undefined
 >(undefined);

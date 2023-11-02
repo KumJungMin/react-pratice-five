@@ -6,8 +6,8 @@ export interface Todo {
 
 export interface TodoAction {
   type: string;
-  todo: Todo;
-  id: number;
+  todo?: Todo;
+  id?: number;
 }
 
 export type TodoDispatch = (action: TodoAction) => void;
