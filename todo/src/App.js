@@ -1,13 +1,13 @@
 import CoinPage from "./components/CoinPage";
 import CoinHeader from "./components/CoinHeader";
-import CoinList from "./components/CoinList";
+import Router from "./Router";
 
 function App() {
   return (
     <div className="App">
       <CoinPage>
         <CoinHeader />
-        <CoinList />
+        <Router />
       </CoinPage>
     </div>
   );
