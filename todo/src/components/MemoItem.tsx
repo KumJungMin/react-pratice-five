@@ -1,6 +1,8 @@
 import { useMemoDispatch } from "../contexts/memo";
 import type { Memo } from "../types/memo";
 
+import React from "react";
+
 interface MemoItemProps {
   memo: Memo;
   coinId: string;
@@ -26,4 +28,4 @@ function MemoItem({ memo, coinId }: MemoItemProps) {
   );
 }
 
-export default MemoItem;
+export default React.memo(MemoItem);
