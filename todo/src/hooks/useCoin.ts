@@ -1,16 +1,22 @@
 import { useQuery } from "react-query";
 import { fetchCoins, fetchCoinInfo } from "../apis/coin";
 
-interface Coin {
+export interface Coin {
   id: string;
   name: string;
   symbol: string;
+  rank: number;
+  is_new: boolean;
+  is_active: boolean;
+  type: string;
 }
 
-export function useCoins() {
-  const { data, isLoading } = useQuery<Coin[]>(["coins"], fetchCoins);
+export function useCoins(select?: (data: Coin[]) => Coin[]) {
+  const { data = [], isLoading } = useQuery<Coin[]>(["coins"], fetchCoins, {
+    select,
+  });
   return {
-    coins: data,
+    coins: data.slice(0, 20),
     isCoinsLoading: isLoading,
   };
 }
