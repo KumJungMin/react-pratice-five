@@ -11,6 +11,27 @@ export interface Coin {
   type: string;
 }
 
+interface InfoData {
+  id: string;
+  name: string;
+  symbol: string;
+  rank: number;
+  is_new: boolean;
+  is_active: boolean;
+  type: string;
+  description: string;
+  message: string;
+  open_source: boolean;
+  started_at: string;
+  development_status: string;
+  hardware_wallet: boolean;
+  proof_type: string;
+  org_structure: string;
+  hash_algorithm: string;
+  first_data_at: string;
+  last_data_at: string;
+}
+
 export function useCoins(select?: (data: Coin[]) => Coin[]) {
   const { data = [], isLoading } = useQuery<Coin[]>(["coins"], fetchCoins, {
     select,
@@ -22,11 +43,12 @@ export function useCoins(select?: (data: Coin[]) => Coin[]) {
 }
 
 export function useCoinInfo(coinId: string) {
-  const { data, isLoading } = useQuery<Coin>(["coinInfo", coinId], () =>
-    fetchCoinInfo(coinId)
+  const { data = {}, isLoading } = useQuery<InfoData>(
+    ["coinInfo", coinId],
+    () => fetchCoinInfo(coinId)
   );
   return {
-    coinInfo: data,
+    coinInfo: data as InfoData,
     isCoinInfoLoading: isLoading,
   };
 }
