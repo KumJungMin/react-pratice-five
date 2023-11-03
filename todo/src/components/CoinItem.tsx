@@ -1,4 +1,4 @@
-import type { Coin } from "../hooks/useCoin";
+import type { Coin } from "../types/coin";
 import React from "react";
 import { Link } from "react-router-dom";
 
