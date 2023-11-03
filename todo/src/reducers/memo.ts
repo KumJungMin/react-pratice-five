@@ -15,16 +15,16 @@ export const initMemoList = {};
 
 interface IAction {
   type: string;
-  payload: Memo;
+  memo: Memo;
 }
 
 // 2. 액션 만들기
-export function reducer(state: MemoList, action: IAction) {
+export function reducer(state: MemoList, action: IAction): MemoList {
   switch (action.type) {
     case "ADD_MEMO":
-      return addMemo(state, action.payload);
+      return addMemo(state, action.memo);
     case "REMOVE_MEMO":
-      return removeMemo(state, action.payload.id);
+      return removeMemo(state, action.memo.id);
     default:
       return state;
   }

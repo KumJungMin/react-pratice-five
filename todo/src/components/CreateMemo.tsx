@@ -1,30 +1,45 @@
-// 입력창(이름, 내용)을 사용해서 저장하면 -> MemoList에 추가되는 컴포넌트
-import { useRef } from "react";
+import React, { useState, useContext } from "react";
+import { useMemoDispatch } from "../contexts/memo";
 
-function CreateMemo() {
-  //  useState은 input값이 변경될 때마다, 컴포넌트가 리렌더링된다.
-  // 이를 방지하기위해, useRef를 사용한다.
-  // const [name, setName] = useState("");
-  // const [content, setContent] = useState("");
-  const title = useRef("");
-  const content = useRef("");
+interface CreateMemoProps {
+  coinId: string;
+}
 
-  function onchange(e: React.ChangeEvent<HTMLInputElement>) {
+function CreateMemo({ coinId }: CreateMemoProps) {
+  // !! 어떻게 하면 onchange 동안에는 리렌더링을 막을 수 있을까?
+  const dispatch = useMemoDispatch();
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+
+  const onchange = (e: React.FormEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
-    if (name === "title") title.current = value;
-    else if (name === "content") content.current = value;
-  }
-  console.log(title.current, content.current);
+    if (name === "title") setTitle(value);
+    else if (name === "content") setContent(value);
+  };
+
+  const onsubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch({ type: "ADD_MEMO", memo: { title, content, id: coinId } });
+
+    setTitle("");
+    setContent("");
+  };
+
   return (
-    <form>
+    <form onSubmit={onsubmit}>
       <input
         name="title"
         onChange={onchange}
+        value={title}
+        placeholder="제목"
       />
       <input
         name="content"
         onChange={onchange}
+        value={content}
+        placeholder="내용"
       />
+      <button>메모 추가</button>
     </form>
   );
 }
