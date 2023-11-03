@@ -1,12 +1,8 @@
 import { useMemoDispatch } from "../contexts/memo";
+import type { Memo } from "../types/memo";
 
 interface MemoItemProps {
-  // !!Memo를 별도 타입으로 분리
-  memo: {
-    title: string;
-    content: string;
-    id: string;
-  };
+  memo: Memo;
   coinId: string;
 }
 

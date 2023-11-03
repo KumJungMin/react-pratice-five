@@ -1,12 +1,4 @@
-interface Memo {
-  id: string;
-  title: string;
-  content: string;
-}
-
-interface MemoList {
-  [key: string]: Memo[];
-}
+import type { MemoList, Memo } from "../types/memo";
 
 // 1. 초기값 지정하기
 export const initMemoList = {};
