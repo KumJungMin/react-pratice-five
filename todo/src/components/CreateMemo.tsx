@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { useMemoDispatch } from "../contexts/memo";
 
 interface CreateMemoProps {
@@ -19,7 +19,7 @@ function CreateMemo({ coinId }: CreateMemoProps) {
 
   const onsubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch({ type: "ADD_MEMO", memo: { title, content, id: coinId } });
+    dispatch({ type: "ADD_MEMO", memo: { title, content }, id: coinId });
 
     setTitle("");
     setContent("");

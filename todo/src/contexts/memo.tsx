@@ -8,9 +8,21 @@ interface Memo {
   id: string;
 }
 
-type MemoState = Memo[];
+interface MemoState {
+  [key: string]: Memo[];
+}
 
-type Action = { type: "ADD_MEMO"; memo: Memo };
+// !! 타입 정리 필요
+type Action =
+  | {
+      type: "ADD_MEMO";
+      memo: {
+        title: string;
+        content: string;
+      };
+      id: string;
+    }
+  | { type: "REMOVE_MEMO"; id: string; memoId: string };
 
 type MemoDispatch = Dispatch<Action>;
 

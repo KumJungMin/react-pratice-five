@@ -1,5 +1,3 @@
-import { useReducer } from "react";
-
 interface Memo {
   id: string;
   title: string;
@@ -15,34 +13,40 @@ export const initMemoList = {};
 
 interface IAction {
   type: string;
-  memo: Memo;
+  memo?: Memo;
+  id?: string;
+  memoId?: string;
 }
 
 // 2. 액션 만들기
 export function reducer(state: MemoList, action: IAction): MemoList {
   switch (action.type) {
     case "ADD_MEMO":
-      return addMemo(state, action.memo);
+      if (!action.memo || !action.id) return state;
+      else return addMemo(state, action.id, action.memo);
     case "REMOVE_MEMO":
-      return removeMemo(state, action.memo.id);
+      if (!action.id || !action.memoId) return state;
+      else return removeMemo(state, action.id, action.memoId);
     default:
       return state;
   }
 }
 
-function addMemo(MemoList: MemoList, newMemo: Memo) {
-  const { id } = newMemo;
-  const currentValue = MemoList[id];
+function addMemo(MemoList: MemoList, coinId: string, memo: Memo) {
+  const currentValue = MemoList[coinId];
+
+  const order = currentValue ? currentValue.length : 0;
+  const newMemo = { ...memo, id: order + 1 + "" };
   return {
     ...MemoList,
-    [id]: currentValue ? [...currentValue, newMemo] : [newMemo],
+    [coinId]: currentValue ? [...currentValue, newMemo] : [newMemo],
   };
 }
 
-function removeMemo(MemoList: MemoList, id: string) {
+function removeMemo(MemoList: MemoList, id: string, memoId: string) {
   const currentValue = MemoList[id];
   return {
     ...MemoList,
-    [id]: currentValue.filter((memo) => memo.id !== id),
+    [id]: currentValue.filter((memo) => memo.id !== memoId),
   };
 }
