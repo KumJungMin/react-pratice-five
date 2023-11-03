@@ -2,6 +2,8 @@
 import { useParams } from "react-router-dom";
 import { useCoinInfo } from "../hooks/useCoin";
 
+import CreateMemo from "../components/CreateMemo";
+
 interface RouteParams {
   coinId: string;
 }
@@ -11,8 +13,20 @@ function CoinInfo() {
   const { coinId } = useParams<RouteParams>();
   const { coinInfo, isCoinInfoLoading } = useCoinInfo(coinId);
 
+  // 1. 메모 생성하기
+  // 2. 메모 목록 보여주기
+  // 3. => 메모 제거하기
   return (
-    <>{isCoinInfoLoading ? <div>Loading...</div> : <>{coinInfo?.rank}</>}</>
+    <>
+      {isCoinInfoLoading ? (
+        <div>Loading...</div>
+      ) : (
+        <>
+          {coinInfo?.rank}
+          <CreateMemo />
+        </>
+      )}
+    </>
   );
 }
 
