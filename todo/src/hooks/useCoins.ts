@@ -13,6 +13,8 @@ export interface Coin {
 type CoinSelect = (data: Coin[]) => Coin[];
 
 export function useCoins(select?: CoinSelect) {
-  const { data, isLoading } = useQuery<Coin[]>("coins", fetchCoins, { select });
+  const { data = [], isLoading } = useQuery<Coin[]>("coins", fetchCoins, {
+    select,
+  });
   return { data, isLoading };
 }
