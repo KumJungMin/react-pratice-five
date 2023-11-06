@@ -1,13 +1,15 @@
-import UseRefEx from "./components/UseRefEx";
+// import UseRefEx from "./components/UseRefEx";
 // import FuncPropEx from "./components/FuncPropEx";
-import StatePropEx from "./components/StatePropEx";
+// import StatePropEx from "./components/StatePropEx";
+import ChildEx from "./components/ChildEx";
 
 function App() {
   return (
     <div className="App">
       {/* <UseRefEx /> */}
       {/* <FuncPropEx /> */}
-      <StatePropEx />
+      {/* <StatePropEx /> */}
+      <ChildEx />
     </div>
   );
 }
