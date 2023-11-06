@@ -1,12 +1,5 @@
-import Router from "./Router";
-import CreateTodo from "./components/CreateTodo";
 function App() {
-  return (
-    <div className="App">
-      <CreateTodo />
-      <Router />
-    </div>
-  );
+  return <div className="App">1</div>;
 }
 
 export default App;
